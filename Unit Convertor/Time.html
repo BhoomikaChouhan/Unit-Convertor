@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Converter</title>
+  <link rel="stylesheet" href="Time.css">
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Time Converter</h1>
+    <div class="form-group">
+      <label for="time">Time:</label>
+      <input type="number" id="time" class="form-control" placeholder="Enter time" />
+    </div>
+    <div class="form-group">
+      <label for="from-unit">From:</label>
+      <select id="from-unit">
+        <option value="seconds">Seconds</option>
+        <option value="minutes">Minutes</option>
+        <option value="hours">Hours</option>
+        <option value="days">Days</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="to-unit">To:</label>
+      <select id="to-unit">
+        <option value="seconds">Seconds</option>
+        <option value="minutes">Minutes</option>
+        <option value="hours">Hours</option>
+        <option value="days">Days</option>
+      </select>
+    </div>
+    <button id="convert-btn">Convert</button>
+    <div class="result">
+      <span id="output"></span>
+    </div>
+  </div>
+
+  <script>
+    const timeInput = document.getElementById("time");
+    const fromUnitSelect = document.getElementById("from-unit");
+    const toUnitSelect = document.getElementById("to-unit");
+    const convertBtn = document.getElementById("convert-btn");
+    const output = document.getElementById("output");
+
+    // Function to convert time units
+    function convertTime(time, fromUnit, toUnit) {
+      const units = {
+        seconds: 1,
+        minutes: 60,
+        hours: 3600,
+        days: 86400
+      };
+
+      const seconds = time * units[fromUnit];
+      const result = seconds / units[toUnit];
+      return result;
+    }
+
+    // Event listener for the convert button
+    convertBtn.addEventListener("click", function() {
+      const time = parseFloat(timeInput.value);
+      const fromUnit = fromUnitSelect.value;
+      const toUnit = toUnitSelect.value;
+
+      if (!isNaN(time)) {
+        const result = convertTime(time, fromUnit, toUnit);
+        output.textContent = `Result: ${result.toFixed(2)} ${toUnit}`;
+      } else {
+        output.textContent = "Invalid input";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volume Converter</title>
+  <link rel="stylesheet" href="Volume.css">
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Volume Converter</h1>
+    <div class="form-group">
+      <label for="value">Value:</label>
+      <input type="number" id="value" placeholder="Enter value" />
+    </div>
+    <div class="form-group">
+      <label for="from">From:</label>
+      <select id="from">
+        <option value="milliliter">Milliliter (ml)</option>
+        <option value="liter">Liter (L)</option>
+        <option value="cubic-meter">Cubic Meter (m³)</option>
+        <option value="teaspoon">Teaspoon (tsp)</option>
+        <option value="tablespoon">Tablespoon (tbsp)</option>
+        <option value="fluid-ounce">Fluid Ounce (fl oz)</option>
+        <option value="cup">Cup (cup)</option>
+        <option value="pint">Pint (pt)</option>
+        <option value="quart">Quart (qt)</option>
+        <option value="gallon">Gallon (gal)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="to">To:</label>
+      <select id="to">
+        <option value="milliliter">Milliliter (ml)</option>
+        <option value="liter">Liter (L)</option>
+        <option value="cubic-meter">Cubic Meter (m³)</option>
+        <option value="teaspoon">Teaspoon (tsp)</option>
+        <option value="tablespoon">Tablespoon (tbsp)</option>
+        <option value="fluid-ounce">Fluid Ounce (fl oz)</option>
+        <option value="cup">Cup (cup)</option>
+        <option value="pint">Pint (pt)</option>
+        <option value="quart">Quart (qt)</option>
+        <option value="gallon">Gallon (gal)</option>
+      </select>
+    </div>
+    <button id="convert-btn">Convert</button>
+    <div class="result">
+      <span id="output"></span>
+    </div>
+  </div>
+
+  <script>
+    const valueInput = document.getElementById("value");
+    const fromSelect = document.getElementById("from");
+    const toSelect = document.getElementById("to");
+    const convertBtn = document.getElementById("convert-btn");
+    const output = document.getElementById("output");
+
+    // Conversion rates based on milliliter as the base unit
+    const conversionRates = {
+      milliliter: 1,
+      liter: 1000,
+      "cubic-meter": 1000000,
+      teaspoon: 4.92892,
+      tablespoon: 14.7868,
+      "fluid-ounce": 29.5735,
+      cup: 236.588,
+      pint: 473.176,
+      quart: 946.353,
+      gallon: 3785.41
+    };
+
+    // Event listener for the convert button
+    convertBtn.addEventListener("click", function() {
+      const value = parseFloat(valueInput.value);
+      const fromUnit = fromSelect.value;
+      const toUnit = toSelect.value;
+
+      if (!isNaN(value)) {
+        const result = value * (conversionRates[toUnit] / conversionRates[fromUnit]);
+        output.textContent = `Result: ${result.toFixed(2)} ${toUnit}`;
+      } else {
+        output.textContent = "Invalid input";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Length Converter</title>
+  <link rel="stylesheet" href="Length.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Length Converter</h1>
+    <div class="form-group">
+      <label for="from-unit">From:</label>
+      <select id="from-unit">
+        <option value="mm">Millimeter (mm)</option>
+        <option value="cm">Centimeter (cm)</option>
+        <option value="m">Meter (m)</option>
+        <option value="km">Kilometer (km)</option>
+        <option value="in">Inch (in)</option>
+        <option value="ft">Feet (ft)</option>
+        <option value="yd">Yard (yd)</option>
+        <option value="mi">Mile (mi)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="to-unit">To:</label>
+      <select id="to-unit">
+        <option value="mm">Millimeter (mm)</option>
+        <option value="cm">Centimeter (cm)</option>
+        <option value="m">Meter (m)</option>
+        <option value="km">Kilometer (km)</option>
+        <option value="in">Inch (in)</option>
+        <option value="ft">Feet (ft)</option>
+        <option value="yd">Yard (yd)</option>
+        <option value="mi">Mile (mi)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="input">Value:</label>
+      <input type="number" id="input" placeholder="Enter value to convert">
+    </div>
+    <button id="convert-btn" class="convert-btn">Convert</button>
+    <div class="result">
+      <span id="output"></span>
+    </div>
+  </div>
+
+  <script src="Length.js">
+    
+  </script>
+</body>
+</html>

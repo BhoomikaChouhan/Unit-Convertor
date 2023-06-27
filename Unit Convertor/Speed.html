@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speed Converter</title>
+  <link rel="stylesheet" href="Speed.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Speed Converter</h1>
+    <div class="form-group">
+      <label for="inputSpeed">Speed:</label>
+      <input type="number" id="inputSpeed" placeholder="Enter speed" />
+    </div>
+    <div class="form-group">
+      <label for="inputUnit">From:</label>
+      <select id="inputUnit">
+        <option value="m/s">m/s</option>
+        <option value="km/h">km/h</option>
+        <option value="mi/h">mi/h</option>
+        <option value="ft/s">ft/s</option>
+        <option value="knots">knots</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="outputUnit">To:</label>
+      <select id="outputUnit">
+        <option value="m/s">m/s</option>
+        <option value="km/h">km/h</option>
+        <option value="mi/h">mi/h</option>
+        <option value="ft/s">ft/s</option>
+        <option value="knots">knots</option>
+      </select>
+    </div>
+    <button id="convertBtn">Convert</button>
+    <div class="result">
+      <span id="outputSpeed"></span>
+    </div>
+  </div>
+
+  <script>
+    const inputSpeed = document.getElementById("inputSpeed");
+    const inputUnit = document.getElementById("inputUnit");
+    const outputUnit = document.getElementById("outputUnit");
+    const convertBtn = document.getElementById("convertBtn");
+    const outputSpeed = document.getElementById("outputSpeed");
+
+    // Conversion rates
+    const conversionRates = {
+      "m/s": 1,
+      "km/h": 3.6,
+      "mi/h": 2.23694,
+      "ft/s": 3.28084,
+      "knots": 1.94384
+    };
+
+    // Event listener for the convert button
+    convertBtn.addEventListener("click", function() {
+      const speed = parseFloat(inputSpeed.value);
+      const fromUnit = inputUnit.value;
+      const toUnit = outputUnit.value;
+
+      if (!isNaN(speed)) {
+        const convertedSpeed = speed * (conversionRates[toUnit] / conversionRates[fromUnit]);
+        outputSpeed.textContent = `Result: ${convertedSpeed.toFixed(2)} ${toUnit}`;
+      } else {
+        outputSpeed.textContent = "Invalid input";
+      }
+    });
+  </script>
+</body>
+</html>

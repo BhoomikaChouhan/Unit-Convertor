@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Area Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group select {
+      background-color: #fff;
+    }
+
+    .form-group input[type="number"] {
+      appearance: textfield;
+    }
+
+    .result {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Area Converter</h1>
+    <div class="form-group">
+      <label for="input-unit">From:</label>
+      <select id="input-unit">
+        <option value="square-meters">Square Meters</option>
+        <option value="square-kilometers">Square Kilometers</option>
+        <option value="hectares">Hectares</option>
+        <option value="square-miles">Square Miles</option>
+        <option value="acres">Acres</option>
+        <option value="square-yards">Square Yards</option>
+        <option value="square-feet">Square Feet</option>
+        <option value="square-inches">Square Inches</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="output-unit">To:</label>
+      <select id="output-unit">
+        <option value="square-meters">Square Meters</option>
+        <option value="square-kilometers">Square Kilometers</option>
+        <option value="hectares">Hectares</option>
+        <option value="square-miles">Square Miles</option>
+        <option value="acres">Acres</option>
+        <option value="square-yards">Square Yards</option>
+        <option value="square-feet">Square Feet</option>
+        <option value="square-inches">Square Inches</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="input-value">Value:</label>
+      <input type="number" id="input-value" placeholder="Enter value" />
+    </div>
+    <button id="convert-btn">Convert</button>
+    <div class="result">
+      <span id="output"></span>
+    </div>
+  </div>
+
+  <script>
+    const conversionRates = {
+      'square-meters': 1,
+      'square-kilometers': 1e6,
+      'hectares': 1e4,
+      'square-miles': 2.59e6,
+      'acres': 4046.86,
+      'square-yards': 0.836127,
+      'square-feet': 0.092903,
+      'square-inches': 0.00064516
+    };
+
+    const inputUnitSelect = document.getElementById('input-unit');
+    const outputUnitSelect = document.getElementById('output-unit');
+    const inputValueInput = document.getElementById('input-value');
+    const convertBtn = document.getElementById('convert-btn');
+    const output = document.getElementById('output');
+
+    function convertArea() {
+      const inputUnit = inputUnitSelect.value;
+      const outputUnit = outputUnitSelect.value;
+      const inputValue = parseFloat(inputValueInput.value);
+
+      if (!isNaN(inputValue)) {
+        const outputValue = inputValue * (conversionRates[inputUnit] / conversionRates[outputUnit]);
+        output.textContent = `Result: ${outputValue.toFixed(2)} ${outputUnit}`;
+      } else {
+        output.textContent = 'Invalid input';
+      }
+    }
+
+    convertBtn.addEventListener('click', convertArea);
+  </script>
+</body>
+</html>

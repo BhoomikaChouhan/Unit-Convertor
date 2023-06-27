@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weight Converter</title>
+  <link rel="stylesheet" href="Weight.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Weight Converter</h1>
+    <div class="form-group">
+      <label for="from-unit">From:</label>
+      <select id="from-unit">
+        <option value="kg">Kilogram (kg)</option>
+        <option value="g">Gram (g)</option>
+        <option value="lb">Pound (lb)</option>
+        <option value="oz">Ounce (oz)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="to-unit">To:</label>
+      <select id="to-unit">
+        <option value="kg">Kilogram (kg)</option>
+        <option value="g">Gram (g)</option>
+        <option value="lb">Pound (lb)</option>
+        <option value="oz">Ounce (oz)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter weight" />
+    </div>
+    <button id="convert-btn">Convert</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const convertBtn = document.getElementById("convert-btn");
+    const fromUnitSelect = document.getElementById("from-unit");
+    const toUnitSelect = document.getElementById("to-unit");
+    const amountInput = document.getElementById("amount");
+    const resultElement = document.getElementById("result");
+
+    // Weight conversion rates
+    const conversionRates = {
+      kg: {
+        kg: 1,
+        g: 1000,
+        lb: 2.20462,
+        oz: 35.274
+      },
+      g: {
+        kg: 0.001,
+        g: 1,
+        lb: 0.00220462,
+        oz: 0.035274
+      },
+      lb: {
+        kg: 0.453592,
+        g: 453.592,
+        lb: 1,
+        oz: 16
+      },
+      oz: {
+        kg: 0.0283495,
+        g: 28.3495,
+        lb: 0.0625,
+        oz: 1
+      }
+    };
+
+    // Function to convert weight
+    function convertWeight(amount, fromUnit, toUnit) {
+      const rate = conversionRates[fromUnit][toUnit];
+      return amount * rate;
+    }
+
+    // Event listener for the convert button
+    convertBtn.addEventListener("click", function() {
+      const amount = parseFloat(amountInput.value);
+      const fromUnit = fromUnitSelect.value;
+      const toUnit = toUnitSelect.value;
+
+      if (!isNaN(amount)) {
+        const result = convertWeight(amount, fromUnit, toUnit);
+        resultElement.textContent = `${amount} ${fromUnit} = ${result} ${toUnit}`;
+      } else {
+        resultElement.textContent = "Invalid amount";
+      }
+    });
+  </script>
+</body>
+</html>
